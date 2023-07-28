@@ -1,6 +1,7 @@
 package com.progettosettimana17.progsett17.data;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.progettosettimana17.progsett17.model.Edificio;
 import com.progettosettimana17.progsett17.model.Postazione;
@@ -18,6 +19,6 @@ public interface IPostazioneDAO {
 
 	public List<Postazione> findByCittà(String città, TipoPostazione tipo);
 
-
+	public Postazione findByCodice(UUID codice);
 
 }

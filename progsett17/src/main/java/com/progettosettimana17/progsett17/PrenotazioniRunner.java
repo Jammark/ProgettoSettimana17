@@ -65,6 +65,7 @@ public class PrenotazioniRunner implements CommandLineRunner {
 				lista.addAll(lista2);
 			}
 
+			log.info("Ricarca postazioni per città: " + edificio1.getCittà());
 			List<Postazione> ricerca = poDao.findByCittà(edificio1.getCittà(), TipoPostazione.OPENSPACE);
 			ricerca.forEach(e -> log.info(TipoPostazione.OPENSPACE.name() + "" + e));
 			ricerca = poDao.findByCittà(edificio1.getCittà(), TipoPostazione.PRIVATO);

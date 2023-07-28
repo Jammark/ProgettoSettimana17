@@ -1,6 +1,7 @@
 package com.progettosettimana17.progsett17.data;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class PostazioneService implements IPostazioneDAO {
 	@Override
 	public boolean isPresente(Postazione p) {
 
-		return false;
+		return repo.findByCodice(p.getCodice()).isPresent();
 	}
 
 	@Override
@@ -48,5 +49,10 @@ public class PostazioneService implements IPostazioneDAO {
 		return repo.findByTipoAndEdificioCittà(tipo, città);
 	}
 
+	@Override
+	public Postazione findByCodice(UUID codice) {
+
+		return repo.findByCodice(codice).orElse(null);
+	}
 
 }

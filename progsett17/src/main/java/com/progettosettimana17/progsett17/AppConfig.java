@@ -78,6 +78,21 @@ public class AppConfig {
 		return e;
 	}
 
+	private Postazione getPostazione(Postazione e) {
+		if (!pDao.isPresente(e)) {
+			pDao.save(e);
+			e = pDao.findByCodice(e.getCodice());
+		} else {
+			Postazione pe = pDao.findByCodice(e.getCodice());
+			if (pe != null) {
+				return pe;
+			} else {
+				throw new IllegalStateException();
+			}
+		}
+		return e;
+	}
+
 	private Edificio getEdificio(String name) {
 		Edificio e = new Edificio(getFaker().address().city(), getFaker().address().fullAddress(), name);
 		return e;
@@ -115,6 +130,6 @@ public class AppConfig {
 	@Scope("prototype")
 	public Postazione getPostazione() {
 		Postazione p = new Postazione(getFaker().lorem().paragraph(), getTipoPostazione(), new Random().nextInt(2, 30));
-		return p;
+		return getPostazione(p);
 	}
 }
